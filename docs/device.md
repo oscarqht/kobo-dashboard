@@ -14,6 +14,23 @@ The package copies the build computer's public `/etc/ssl/cert.pem` CA roots to `
 
 Use [NickelMenu](https://github.com/pgaskin/NickelMenu) only after checking compatibility with the exact installed firmware. This launch integration is limited to firmware 4.x; it refuses other versions. It does not patch firmware or bypass compatibility checks. Firmware 4.x alone does not guarantee every NickelMenu release is compatible.
 
+## Before copying dashboard files
+
+The dashboard archive does **not** install NickelMenu. Its `nickelmenu/kobo-dashboard` file is only a menu entry. Creating `.adds` manually is fine, but cannot create the NickelMenu menu by itself.
+
+1. Check the exact firmware first. This integration requires 4.x; NickelMenu currently states that 5.x is unsupported.
+2. Follow the [official NickelMenu installation](https://pgaskin.net/NickelMenu/): download its `KoboRoot.tgz` to `.kobo/KoboRoot.tgz`, eject, and let installation/reboot finish. Confirm **NickelMenu itself is visible** before copying the dashboard. If it is absent, stop here and diagnose the launcher installation.
+3. Before adding custom folders, back up `.kobo/Kobo/Kobo eReader.conf` to the computer. Kobo firmware 4.17+ can index hidden directories. The [KOReader installation guide](https://github.com/koreader/koreader/wiki/Installation-on-Kobo-devices) recommends excluding custom hidden directories with this setting:
+
+```ini
+[FeatureSettings]
+ExcludeSyncFolders=(\\.(?!kobo|adobe).+|([^.][^/]*/)+\\..+)
+```
+
+The backslashes above are literal. If `[FeatureSettings]` already exists, add the key within that section rather than creating another section. If `ExcludeSyncFolders` already exists, preserve its existing exclusions and review the merge; do not blindly replace it. This is preventive guidance, not proof that indexing caused a particular slowdown.
+
+If the device becomes slow after copying files and NickelMenu is absent, reconnect USB and move **only** `.adds/kobo-dashboard` and `.adds/nm/kobo-dashboard` back to the computer. Preserve other `.adds` contents, books, and `.kobo`. Eject, perform a normal restart, and check whether performance recovers before installing anything else. The app has no automatic boot entry in this package and is launched only by selecting its menu item. A missing menu alone does not explain a slowdown; inspect firmware, copied paths, configuration and any existing logs before assigning a cause.
+
 ## USB install
 
 1. Connect to home Wi-Fi using the normal Kobo interface first, so Nickel has a saved WPA network and loaded the Wi-Fi modules. Turn its frontlight off for the battery target.
