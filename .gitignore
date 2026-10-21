@@ -1,2 +1,15 @@
-.worktrees
-.raft
+.worktrees/
+.raft/
+dist/
+data/
+/dashboard
+/setup
+*.test
+coverage.out
+credentials.json
+credentials-*.json
+client_secret*.json
+.env
+.env.*
+device.env
+.DS_Store

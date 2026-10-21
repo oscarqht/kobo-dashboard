@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Paper · Kobo dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/editor.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Paper dashboard home"><span class="brand-icon">▥</span> Paper<span class="brand-detail">YOUR KOBO, AT A GLANCE</span></a>
+    <div class="connection"><span class="status-dot"></span><span id="connection">Connecting to Kobo…</span></div>
+  </header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">A LITTLE SPACE FOR YOUR DAY</p><h1>Make yourself at home.</h1><p class="subheading">Arrange what matters. Your Kobo takes care of the rest.</p></div>
+      <div class="intro-actions"><span id="save-status" role="status" aria-live="polite">All changes saved</span><button id="save" class="primary" disabled>Save layout <span>↗</span></button></div>
+    </section>
+
+    <section id="pair-panel" class="pair-panel" hidden>
+      <div><p class="eyebrow">LET’S CONNECT</p><h2>A small screen. A shared space.</h2><p>Open the editor on your Kobo, then enter the pairing code shown there.</p></div>
+      <form id="pair-form"><label for="pair-code">Pairing code</label><div class="pair-fields"><input id="pair-code" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="000000" required><button class="primary">Connect</button></div><p id="pair-error" role="alert"></p></form>
+    </section>
+
+    <div id="workspace" class="workspace" hidden>
+      <aside class="sidebar">
+        <div class="section-label"><h2>Your widgets</h2><span id="widget-count">02</span></div>
+        <div id="widget-list" class="widget-list"></div>
+        <button id="add-widget" class="add-widget">＋ <span>Add a widget</span></button>
+        <div id="add-menu" class="add-menu" hidden><button data-add="calendar">▦ Calendar <small>Week or month, your choice</small></button><button data-add="weather">☀ Weather <small>A little heads-up for outside</small></button></div>
+        <div class="sidebar-divider"></div>
+        <div class="section-label"><h2>Start with a layout</h2></div>
+        <div class="presets"><button data-preset="month" title="Weather above a month calendar"><span class="preset-drawing"><i></i><i></i></span>Monthly overview</button><button data-preset="week" title="Weather above a week calendar"><span class="preset-drawing week"><i></i><i></i></span>A week ahead</button></div>
+        <p class="sidebar-note">Made for a slower screen.<br>Changes reach your Kobo when you save.</p>
+      </aside>
+
+      <section class="preview-column" aria-label="Kobo dashboard preview">
+        <div class="preview-toolbar"><span>LIVE PREVIEW</span><div><button id="mode-preview" class="mode active">Snapshot</button><button id="mode-layout" class="mode">Arrange</button></div><span>PORTRAIT · ELIPSA 2E</span></div>
+        <div class="device"><div class="device-camera"></div><div id="device-screen" class="device-screen"><img id="snapshot" alt="Current native dashboard snapshot" src="/snapshot.png"><div id="layout-grid" class="layout-grid" hidden></div></div><span class="device-logo">kobo</span></div>
+        <p class="preview-caption"><span>◷</span> Hourly updates. A quiet screen between them.</p>
+        <div class="device-actions"><button id="refresh">↻ Refresh data</button><button id="today">↤ Back to today</button></div>
+      </section>
+
+      <aside class="inspector">
+        <div class="section-label"><h2 id="inspector-title">Widget settings</h2><span>↗</span></div>
+        <div id="widget-settings"></div>
+        <div class="sidebar-divider"></div>
+        <details open><summary>Dashboard settings</summary><div id="dashboard-settings"></div></details>
+        <div class="screen-note"><span>▱</span><p><strong>Always there, quietly.</strong><br>The last snapshot stays on screen while your Kobo sleeps.</p></div>
+      </aside>
+    </div>
+    <p id="error" class="error" role="alert" hidden></p>
+  </main>
+  <footer><span>Paper / A home for the everyday.</span><span>ON YOUR DEVICE. ON YOUR TERMS.</span></footer>
+</body>
+</html>

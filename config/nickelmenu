@@ -1,0 +1,2 @@
+# Install only after verifying NickelMenu compatibility with the device firmware.
+menu_item :main :Home dashboard :cmd_spawn :quiet:/bin/sh /mnt/onboard/.adds/kobo-dashboard/launch.sh
